@@ -89,6 +89,8 @@ To use SDObjection with ARC, you might want to set it up with [CocoaPods] like t
 Create a PodFile and put it into your root folder of your project
 Podfile
 ```
+platform :ios, '5.0'
+
 pod 'SDObjection'
 ```
 
