@@ -8,7 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		7F053762B8FD4C538FB467FF /* libPods-SDObjectionTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2779BB685C4CA9A1BF1D4F /* libPods-SDObjectionTests.a */; };
+		8D4DF261A14A37EB378C516D /* SomeOtherObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DFD854849B57AE7BCCD58 /* SomeOtherObject.m */; };
+		8D4DF2737977DE86CC1FBB86 /* SomeObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DFFED442CE33975F566C6 /* SomeObject.m */; };
+		8D4DF2851F67E9EA212E2FF1 /* BindProviderToClassModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF9CD462AC33C0223CEAF /* BindProviderToClassModule.m */; };
+		8D4DF2A2159CAB0B6F193F55 /* SomeDependencyModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF8566E7F155C934A8910 /* SomeDependencyModule.m */; };
+		8D4DF2C592CC1909E73591EE /* BindClassToClassModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF0F22BC564C131029327 /* BindClassToClassModule.m */; };
+		8D4DF2FA1C1B0C01D36FEB05 /* RegisterEagerSingletonModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF265C5F7AF860D4249CC /* RegisterEagerSingletonModule.m */; };
+		8D4DF568E4C4C837BC202A7E /* BindBlockToClassModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DFC2680ECB2E1F612971E /* BindBlockToClassModule.m */; };
+		8D4DF57318702F9AC51F82FF /* BindInstanceToClassModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF0F7FC6CF0B7EE72516D /* BindInstanceToClassModule.m */; };
+		8D4DF5A6FC3FE0AEF1E3A674 /* SomeDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF81B326A2B016F5E8701 /* SomeDependency.m */; };
+		8D4DF63AB900333A2F1D0B41 /* SomeOtherDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DFC80A62CD6B7D607279F /* SomeOtherDependency.m */; };
+		8D4DF6C27E8F6DEE000C6B44 /* SomeProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF36BA07725FA13D19DD4 /* SomeProvider.m */; };
+		8D4DF88672E0ED031BE3CC15 /* BindProviderToProtocolModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DFDAD742036552D957BC3 /* BindProviderToProtocolModule.m */; };
 		8D4DF92C9D98DE46A93CD89F /* SDObjectionSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DFA87DCE27B35592BBCAC /* SDObjectionSpec.m */; };
+		8D4DF9FA3B0DDADDFC415EE4 /* BindClassToProtocolModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF563E526E3B443E8A41F /* BindClassToProtocolModule.m */; };
+		8D4DFBA73C6A667FC8220698 /* SomeSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DFBDA852002CFF2F6FA01 /* SomeSingleton.m */; };
+		8D4DFBBBDACC445B500D09AD /* BindInstanceToProtocolModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF0B5B41321001E3D3D97 /* BindInstanceToProtocolModule.m */; };
+		8D4DFC9455016BCB053C2F9A /* BindClassToProtocolSingletonModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF9D9AC9C8246503A67BD /* BindClassToProtocolSingletonModule.m */; };
+		8D4DFE0D8E6CC9CF76A2A7BF /* BindBlockToProtocolModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF7A04D83B30AAE930D3F /* BindBlockToProtocolModule.m */; };
+		8D4DFEC1E80DDD50EA6EDDC6 /* SomeModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF12695AD2B19CBC412EE /* SomeModule.m */; };
+		8D4DFFB1779934F2826B17B0 /* RegisterSingletonModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF6906036E4EA501D82C1 /* RegisterSingletonModule.m */; };
 		CBB07896166679A800160B61 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB07895166679A800160B61 /* UIKit.framework */; };
 		CBB07898166679A800160B61 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB07897166679A800160B61 /* Foundation.framework */; };
 		CBB0789A166679A800160B61 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB07899166679A800160B61 /* CoreGraphics.framework */; };
@@ -38,7 +57,47 @@
 /* Begin PBXFileReference section */
 		242639A9DF6A4FF7AA81661F /* Pods-SDObjectionTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDObjectionTests.xcconfig"; path = "Pods/Pods-SDObjectionTests.xcconfig"; sourceTree = SOURCE_ROOT; };
 		2978BE0D077B4D83846CAB68 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		8D4DF031485F2DA09F23DAED /* SomeObjectProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeObjectProtocol.h; sourceTree = "<group>"; };
+		8D4DF0B5B41321001E3D3D97 /* BindInstanceToProtocolModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindInstanceToProtocolModule.m; sourceTree = "<group>"; };
+		8D4DF0F22BC564C131029327 /* BindClassToClassModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindClassToClassModule.m; sourceTree = "<group>"; };
+		8D4DF0F7FC6CF0B7EE72516D /* BindInstanceToClassModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindInstanceToClassModule.m; sourceTree = "<group>"; };
+		8D4DF12695AD2B19CBC412EE /* SomeModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomeModule.m; sourceTree = "<group>"; };
+		8D4DF265C5F7AF860D4249CC /* RegisterEagerSingletonModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterEagerSingletonModule.m; sourceTree = "<group>"; };
+		8D4DF275A44A45F86796E93C /* BindBlockToProtocolModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindBlockToProtocolModule.h; sourceTree = "<group>"; };
+		8D4DF2ABE1F463D035E6A7E8 /* BindClassToProtocolSingletonModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindClassToProtocolSingletonModule.h; sourceTree = "<group>"; };
+		8D4DF36BA07725FA13D19DD4 /* SomeProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomeProvider.m; sourceTree = "<group>"; };
+		8D4DF3EA518D41AD817E09E6 /* SomeDependencyModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeDependencyModule.h; sourceTree = "<group>"; };
+		8D4DF42B8ADD11D7FE94D5E3 /* SomeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeSingleton.h; sourceTree = "<group>"; };
+		8D4DF46F34C9F14AF1B78F1C /* SomeSingletonProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeSingletonProtocol.h; sourceTree = "<group>"; };
+		8D4DF5050D00DECDA772A8EA /* BindProviderToProtocolModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindProviderToProtocolModule.h; sourceTree = "<group>"; };
+		8D4DF505C0DB12C951A7B1E4 /* SomeObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeObject.h; sourceTree = "<group>"; };
+		8D4DF55C438ED5ADEC2ED77C /* BindBlockToClassModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindBlockToClassModule.h; sourceTree = "<group>"; };
+		8D4DF563E526E3B443E8A41F /* BindClassToProtocolModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindClassToProtocolModule.m; sourceTree = "<group>"; };
+		8D4DF58E3AEFC2BB92F723A0 /* BindClassToProtocolModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindClassToProtocolModule.h; sourceTree = "<group>"; };
+		8D4DF59E830FDB1D4C327A60 /* BindInstanceToProtocolModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindInstanceToProtocolModule.h; sourceTree = "<group>"; };
+		8D4DF62E16392612136FA81E /* RegisterEagerSingletonModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterEagerSingletonModule.h; sourceTree = "<group>"; };
+		8D4DF6906036E4EA501D82C1 /* RegisterSingletonModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterSingletonModule.m; sourceTree = "<group>"; };
+		8D4DF79A613E3EB89534534F /* SomeOtherObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeOtherObject.h; sourceTree = "<group>"; };
+		8D4DF7A04D83B30AAE930D3F /* BindBlockToProtocolModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindBlockToProtocolModule.m; sourceTree = "<group>"; };
+		8D4DF7D3396125745B16844B /* BindProviderToClassModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindProviderToClassModule.h; sourceTree = "<group>"; };
+		8D4DF81B326A2B016F5E8701 /* SomeDependency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomeDependency.m; sourceTree = "<group>"; };
+		8D4DF8566E7F155C934A8910 /* SomeDependencyModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomeDependencyModule.m; sourceTree = "<group>"; };
+		8D4DF9CD462AC33C0223CEAF /* BindProviderToClassModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindProviderToClassModule.m; sourceTree = "<group>"; };
+		8D4DF9D9AC9C8246503A67BD /* BindClassToProtocolSingletonModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindClassToProtocolSingletonModule.m; sourceTree = "<group>"; };
 		8D4DFA87DCE27B35592BBCAC /* SDObjectionSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDObjectionSpec.m; sourceTree = "<group>"; };
+		8D4DFB22E17A73270CA4A294 /* SomeProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeProvider.h; sourceTree = "<group>"; };
+		8D4DFBDA852002CFF2F6FA01 /* SomeSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomeSingleton.m; sourceTree = "<group>"; };
+		8D4DFC2680ECB2E1F612971E /* BindBlockToClassModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindBlockToClassModule.m; sourceTree = "<group>"; };
+		8D4DFC68721F01E9E165DB81 /* BindInstanceToClassModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindInstanceToClassModule.h; sourceTree = "<group>"; };
+		8D4DFC80A62CD6B7D607279F /* SomeOtherDependency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomeOtherDependency.m; sourceTree = "<group>"; };
+		8D4DFD854849B57AE7BCCD58 /* SomeOtherObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomeOtherObject.m; sourceTree = "<group>"; };
+		8D4DFDAD742036552D957BC3 /* BindProviderToProtocolModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindProviderToProtocolModule.m; sourceTree = "<group>"; };
+		8D4DFED44A130BDD4176D482 /* SomeDependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeDependency.h; sourceTree = "<group>"; };
+		8D4DFEFC67D79F599B67470C /* RegisterSingletonModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterSingletonModule.h; sourceTree = "<group>"; };
+		8D4DFF358019400B93D82804 /* BindClassToClassModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindClassToClassModule.h; sourceTree = "<group>"; };
+		8D4DFF4909746C4E3D3031F6 /* SomeOtherDependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeOtherDependency.h; sourceTree = "<group>"; };
+		8D4DFFAD82F8F90FBC6002F7 /* SomeModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeModule.h; sourceTree = "<group>"; };
+		8D4DFFED442CE33975F566C6 /* SomeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomeObject.m; sourceTree = "<group>"; };
 		9DE141CD645B4736988C25C9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBB07891166679A800160B61 /* SDObjection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDObjection.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBB07895166679A800160B61 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -86,6 +145,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D4DF3D3ECAAB7FCDCCBF422 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				8D4DFED44A130BDD4176D482 /* SomeDependency.h */,
+				8D4DF81B326A2B016F5E8701 /* SomeDependency.m */,
+				8D4DF505C0DB12C951A7B1E4 /* SomeObject.h */,
+				8D4DFFED442CE33975F566C6 /* SomeObject.m */,
+				8D4DF031485F2DA09F23DAED /* SomeObjectProtocol.h */,
+				8D4DFF4909746C4E3D3031F6 /* SomeOtherDependency.h */,
+				8D4DFC80A62CD6B7D607279F /* SomeOtherDependency.m */,
+				8D4DF79A613E3EB89534534F /* SomeOtherObject.h */,
+				8D4DFD854849B57AE7BCCD58 /* SomeOtherObject.m */,
+				8D4DFB22E17A73270CA4A294 /* SomeProvider.h */,
+				8D4DF36BA07725FA13D19DD4 /* SomeProvider.m */,
+				8D4DF42B8ADD11D7FE94D5E3 /* SomeSingleton.h */,
+				8D4DFBDA852002CFF2F6FA01 /* SomeSingleton.m */,
+				8D4DF46F34C9F14AF1B78F1C /* SomeSingletonProtocol.h */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		8D4DF99C66FDD4025939E4BD /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				8D4DF55C438ED5ADEC2ED77C /* BindBlockToClassModule.h */,
+				8D4DFC2680ECB2E1F612971E /* BindBlockToClassModule.m */,
+				8D4DF275A44A45F86796E93C /* BindBlockToProtocolModule.h */,
+				8D4DF7A04D83B30AAE930D3F /* BindBlockToProtocolModule.m */,
+				8D4DFF358019400B93D82804 /* BindClassToClassModule.h */,
+				8D4DF0F22BC564C131029327 /* BindClassToClassModule.m */,
+				8D4DF58E3AEFC2BB92F723A0 /* BindClassToProtocolModule.h */,
+				8D4DF563E526E3B443E8A41F /* BindClassToProtocolModule.m */,
+				8D4DF2ABE1F463D035E6A7E8 /* BindClassToProtocolSingletonModule.h */,
+				8D4DF9D9AC9C8246503A67BD /* BindClassToProtocolSingletonModule.m */,
+				8D4DFC68721F01E9E165DB81 /* BindInstanceToClassModule.h */,
+				8D4DF0F7FC6CF0B7EE72516D /* BindInstanceToClassModule.m */,
+				8D4DF59E830FDB1D4C327A60 /* BindInstanceToProtocolModule.h */,
+				8D4DF0B5B41321001E3D3D97 /* BindInstanceToProtocolModule.m */,
+				8D4DF7D3396125745B16844B /* BindProviderToClassModule.h */,
+				8D4DF9CD462AC33C0223CEAF /* BindProviderToClassModule.m */,
+				8D4DF5050D00DECDA772A8EA /* BindProviderToProtocolModule.h */,
+				8D4DFDAD742036552D957BC3 /* BindProviderToProtocolModule.m */,
+				8D4DF62E16392612136FA81E /* RegisterEagerSingletonModule.h */,
+				8D4DF265C5F7AF860D4249CC /* RegisterEagerSingletonModule.m */,
+				8D4DFEFC67D79F599B67470C /* RegisterSingletonModule.h */,
+				8D4DF6906036E4EA501D82C1 /* RegisterSingletonModule.m */,
+				8D4DF3EA518D41AD817E09E6 /* SomeDependencyModule.h */,
+				8D4DF8566E7F155C934A8910 /* SomeDependencyModule.m */,
+				8D4DFFAD82F8F90FBC6002F7 /* SomeModule.h */,
+				8D4DF12695AD2B19CBC412EE /* SomeModule.m */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
 		CBB07886166679A800160B61 = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +262,8 @@
 			children = (
 				CBB078BA166679A800160B61 /* Supporting Files */,
 				8D4DFA87DCE27B35592BBCAC /* SDObjectionSpec.m */,
+				8D4DF99C66FDD4025939E4BD /* Modules */,
+				8D4DF3D3ECAAB7FCDCCBF422 /* Classes */,
 			);
 			path = SDObjectionTests;
 			sourceTree = "<group>";
@@ -311,6 +426,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D4DF92C9D98DE46A93CD89F /* SDObjectionSpec.m in Sources */,
+				8D4DF568E4C4C837BC202A7E /* BindBlockToClassModule.m in Sources */,
+				8D4DFE0D8E6CC9CF76A2A7BF /* BindBlockToProtocolModule.m in Sources */,
+				8D4DF2C592CC1909E73591EE /* BindClassToClassModule.m in Sources */,
+				8D4DF9FA3B0DDADDFC415EE4 /* BindClassToProtocolModule.m in Sources */,
+				8D4DFC9455016BCB053C2F9A /* BindClassToProtocolSingletonModule.m in Sources */,
+				8D4DF57318702F9AC51F82FF /* BindInstanceToClassModule.m in Sources */,
+				8D4DFBBBDACC445B500D09AD /* BindInstanceToProtocolModule.m in Sources */,
+				8D4DF2851F67E9EA212E2FF1 /* BindProviderToClassModule.m in Sources */,
+				8D4DF88672E0ED031BE3CC15 /* BindProviderToProtocolModule.m in Sources */,
+				8D4DF2FA1C1B0C01D36FEB05 /* RegisterEagerSingletonModule.m in Sources */,
+				8D4DFFB1779934F2826B17B0 /* RegisterSingletonModule.m in Sources */,
+				8D4DF2A2159CAB0B6F193F55 /* SomeDependencyModule.m in Sources */,
+				8D4DF5A6FC3FE0AEF1E3A674 /* SomeDependency.m in Sources */,
+				8D4DF2737977DE86CC1FBB86 /* SomeObject.m in Sources */,
+				8D4DF63AB900333A2F1D0B41 /* SomeOtherDependency.m in Sources */,
+				8D4DF261A14A37EB378C516D /* SomeOtherObject.m in Sources */,
+				8D4DF6C27E8F6DEE000C6B44 /* SomeProvider.m in Sources */,
+				8D4DFBA73C6A667FC8220698 /* SomeSingleton.m in Sources */,
+				8D4DFEC1E80DDD50EA6EDDC6 /* SomeModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
