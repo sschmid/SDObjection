@@ -86,9 +86,11 @@ You find the source files you need in Pods/Objection/Source
 
 To use SDObjection with ARC, you might want to set it up with [CocoaPods] like this:
 
-Create a PodFile and put it into your root folder of your project
+Create a Podfile and put it into your root folder of your project
 Podfile
 ```
+platform :ios, '5.0'
+
 pod 'SDObjection'
 ```
 
