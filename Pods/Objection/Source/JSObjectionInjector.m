@@ -145,8 +145,8 @@
 - (void)removeModuleWithName:(NSString *)name {
     JSObjectionModule *module = [_modules objectForKey:name];
     if (module) {
-        [self unConfigureModule:module];
         [module unload];
+        [self unConfigureModule:module];
         [_modules removeObjectForKey:name];
     }
 }
