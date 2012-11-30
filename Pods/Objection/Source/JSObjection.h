@@ -7,4 +7,5 @@
 + (JSObjectionInjector *)createInjector;
 + (void)setDefaultInjector:(JSObjectionInjector *)anInjector;
 + (JSObjectionInjector *)defaultInjector;
+
 @end

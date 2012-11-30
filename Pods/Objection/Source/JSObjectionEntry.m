@@ -15,4 +15,5 @@
 - (JSObjectionInstantiationRule)lifeCycle {
     return JSObjectionInstantiationRuleNone;
 }
+
 @end

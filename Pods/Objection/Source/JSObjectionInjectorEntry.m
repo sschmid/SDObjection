@@ -2,8 +2,8 @@
 #import "JSObjection.h"
 #import "JSObjectionUtils.h"
 
-@interface JSObjectionInjectorEntry()
-- (void)notifyObjectThatItIsReady: (id)object;
+@interface JSObjectionInjectorEntry ()
+- (void)notifyObjectThatItIsReady:(id)object;
 - (id)buildObject:(NSArray *)arguments;
 - (id)argumentsForObject:(NSArray *)givenArguments;
 - (SEL)initializerForObject;
@@ -15,35 +15,33 @@
 @synthesize autoRegisteredModules = _autoRegisteredModules;
 
 
-
 #pragma mark Instance Methods
 #pragma mark -
 
-- (id)initWithClass:(Class)theClass lifeCycle:(JSObjectionInstantiationRule)theLifeCycle
-{
-  if ((self = [super init])) {
-    _lifeCycle = theLifeCycle;
-    _classEntry = theClass;
-    _storageCache = nil;
-    _autoRegisteredModules = [[NSMutableArray alloc] init];
-  }
+- (id)initWithClass:(Class)theClass lifeCycle:(JSObjectionInstantiationRule)theLifeCycle {
+    if ((self = [super init])) {
+        _lifeCycle = theLifeCycle;
+        _classEntry = theClass;
+        _storageCache = nil;
+        _autoRegisteredModules = [[NSMutableArray alloc] init];
+    }
 
-  return self;
+    return self;
 }
 
 - (id)extractObject:(NSArray *)arguments {
-  if (self.lifeCycle == JSObjectionInstantiationRuleNormal || !_storageCache) {
-      return [self buildObject:arguments];
-  }
+    if (self.lifeCycle == JSObjectionInstantiationRuleNormal || !_storageCache) {
+        return [self buildObject:arguments];
+    }
 
-  return _storageCache;
+    return _storageCache;
 }
 
-- (void)dealloc
-{
-  [_storageCache release]; _storageCache = nil;
-  [_autoRegisteredModules release];
-  [super dealloc];
+- (void)dealloc {
+    [_storageCache release];
+    _storageCache = nil;
+    [_autoRegisteredModules release];
+    [super dealloc];
 }
 
 
@@ -51,9 +49,9 @@
 #pragma mark Private Methods
 
 - (void)notifyObjectThatItIsReady:(id)object {
-  if([object respondsToSelector:@selector(awakeFromObjection)]) {
-    [object performSelector:@selector(awakeFromObjection)];
-  }
+    if ([object respondsToSelector:@selector(awakeFromObjection)]) {
+        [object performSelector:@selector(awakeFromObjection)];
+    }
 }
 
 - (id)buildObject:(NSArray *)arguments {
@@ -70,8 +68,8 @@
     }
 
     if ([self.classEntry respondsToSelector:@selector(objectionRequires)]) {
-      NSArray *properties = [self.classEntry performSelector:@selector(objectionRequires)];
-      NSMutableDictionary *propertiesDictionary = [NSMutableDictionary dictionaryWithCapacity:properties.count];
+        NSArray *properties = [self.classEntry performSelector:@selector(objectionRequires)];
+        NSMutableDictionary *propertiesDictionary = [NSMutableDictionary dictionaryWithCapacity:properties.count];
 
         for (NSString *propertyName in properties) {
             objc_property_t property = JSObjectionUtils.propertyForClass(self.classEntry, propertyName);
@@ -86,10 +84,12 @@
 
             id theObject = [self.injector getObject:desiredClassOrProtocol];
 
-            if(theObject == nil && propertyInfo.type == JSObjectionTypeClass) {
+            if (theObject == nil && propertyInfo.type == JSObjectionTypeClass) {
                 JSObjectionModule *module = [[JSObjectionModule alloc] init];
                 [module bindClass:desiredClassOrProtocol toClass:desiredClassOrProtocol asSingleton:NO];
+
                 [_injector addModule:module withName:[NSString stringWithFormat:@"__autoRegisteredModule_%u", arc4random() % 10000000]];
+
                 [_autoRegisteredModules addObject:module];
                 [module release];
                 theObject = [_injector getObject:desiredClassOrProtocol];
@@ -105,7 +105,7 @@
         [objectUnderConstruction setValuesForKeysWithDictionary:propertiesDictionary];
     }
 
-    [self notifyObjectThatItIsReady: objectUnderConstruction];
+    [self notifyObjectThatItIsReady:objectUnderConstruction];
     return objectUnderConstruction;
 }
 
@@ -120,7 +120,7 @@
 #pragma mark Class Methods
 #pragma mark -
 
-+ (id)entryWithClass:(Class)theClass lifeCycle:(JSObjectionInstantiationRule)theLifeCycle  {
++ (id)entryWithClass:(Class)theClass lifeCycle:(JSObjectionInstantiationRule)theLifeCycle {
     return [[[JSObjectionInjectorEntry alloc] initWithClass:theClass lifeCycle:theLifeCycle] autorelease];
 }
 

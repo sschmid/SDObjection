@@ -4,35 +4,20 @@
 #import "JSObjectionUtils.h"
 #import "Objection.h"
 
-@interface __JSObjectionInjectorDefaultModule : JSObjectionModule {
-    JSObjectionInjector *_injector;
-}
+@interface __JSObjectionInjectorDefaultModule : JSObjectionModule
 @end
 
 @implementation __JSObjectionInjectorDefaultModule
 
-- (id)initWithInjector:(JSObjectionInjector *)injector {
-    if ((self = [super init])) {
-        _injector = [injector retain];
-    }
-    return self;
-}
-
 - (void)configure:(JSObjectionInjector *)injector {
-    [self bind:[[[JSObjectFactory alloc] initWithInjector:_injector] autorelease] toClass:[JSObjectFactory class]];
+    [self bind:[[[JSObjectFactory alloc] initWithInjector:injector] autorelease] toClass:[JSObjectFactory class]];
 }
 
-- (void)dealloc {
-    [_injector release];
-    [super dealloc];
-}
 @end
 
 @interface JSObjectionInjector (Private)
 - (void)initializeEagerSingletons;
-
 - (void)configureDefaultModule;
-
 - (void)configureModule:(JSObjectionModule *)module;
 @end
 
@@ -115,8 +100,9 @@
 }
 
 - (void)configureDefaultModule {
-    __JSObjectionInjectorDefaultModule *module = [[[__JSObjectionInjectorDefaultModule alloc] initWithInjector:self] autorelease];
+    __JSObjectionInjectorDefaultModule *module = [[__JSObjectionInjectorDefaultModule alloc] init];
     [self addModule:module];
+    [module release];
 }
 
 #pragma mark - 
