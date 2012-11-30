@@ -11,4 +11,5 @@
 
 @interface SomeModule : JSObjectionModule
 @property(nonatomic) BOOL unloaded;
+@property(nonatomic, strong) id unloadObj;
 @end

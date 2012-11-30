@@ -185,6 +185,16 @@ SPEC_BEGIN(SDObjectionSpec)
                     [[module.eagerSingletons should] beEmpty];
                 });
 
+                it(@"can retrieve objects from context in module.unload", ^{
+                    SomeModule *module = [[SomeModule alloc] init];
+                    [injector addModule:module];
+                    [injector removeModuleClass:[module class]];
+                    BOOL has = module.unloadObj != nil;
+
+                    [[theValue(has) should] beYes];
+
+                });
+
             });
 
 
