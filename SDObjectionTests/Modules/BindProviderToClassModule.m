@@ -12,7 +12,7 @@
 
 @implementation BindProviderToClassModule
 
-- (void)configure:(JSObjectionInjector *)injector {
+- (void)configure {
     [self bindProvider:[[SomeProvider alloc] init] toClass:[SomeObject class]];
 }
 

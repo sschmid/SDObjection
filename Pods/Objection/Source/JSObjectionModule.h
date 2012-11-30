@@ -12,6 +12,7 @@
     NSMutableSet *_eagerSingletons;
 }
 
+@property(nonatomic, retain) JSObjectionInjector *injector;
 @property(nonatomic, readonly) NSDictionary *bindings;
 @property(nonatomic, readonly) NSSet *eagerSingletons;
 
@@ -28,7 +29,7 @@
 - (void)registerSingleton:(Class)aClass;
 - (void)registerEagerSingleton:(Class)aClass;
 
-- (void)configure:(JSObjectionInjector *)injector;
+- (void)configure;
 - (void)unload;
 
 - (void)reset;

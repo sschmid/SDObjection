@@ -9,8 +9,8 @@
 
 @implementation __JSObjectionInjectorDefaultModule
 
-- (void)configure:(JSObjectionInjector *)injector {
-    [self bind:[[[JSObjectFactory alloc] initWithInjector:injector] autorelease] toClass:[JSObjectFactory class]];
+- (void)configure {
+    [self bind:[[[JSObjectFactory alloc] initWithInjector:self.injector] autorelease] toClass:[JSObjectFactory class]];
 }
 
 @end
@@ -93,7 +93,8 @@
 }
 
 - (void)configureModule:(JSObjectionModule *)module {
-    [module configure:self];
+    module.injector = self;
+    [module configure];
     for (NSString *singleton in module.eagerSingletons)
         [_eagerSingletons addObject:singleton];
     [_context addEntriesFromDictionary:module.bindings];

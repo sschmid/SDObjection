@@ -33,8 +33,10 @@
 @end
 
 @implementation JSObjectionModule
+@synthesize injector = _injector;
 @synthesize bindings = _bindings;
 @synthesize eagerSingletons = _eagerSingletons;
+
 
 - (id)init {
     if ((self = [super init])) {
@@ -118,10 +120,12 @@
     [_bindings setObject:[JSObjectionInjectorEntry entryWithClass:aClass lifeCycle:JSObjectionInstantiationRuleSingleton] forKey:key];
 }
 
-- (void)configure:(JSObjectionInjector *)injector {
+- (void)configure {
 }
 
 - (void)unload {
+    [_injector release];
+    _injector = nil;
 }
 
 - (void)reset {
@@ -135,6 +139,8 @@
     _bindings = nil;
     [_eagerSingletons release];
     _eagerSingletons = nil;
+    [_injector release];
+    _injector = nil;
     [super dealloc];
 }
 

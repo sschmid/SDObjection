@@ -11,7 +11,7 @@
 
 @implementation BindClassToProtocolSingletonModule
 
-- (void)configure:(JSObjectionInjector *)injector {
+- (void)configure {
     [self bindClass:[SomeObject class] toProtocol:@protocol(SomeObjectProtocol) asSingleton:YES];
 }
 

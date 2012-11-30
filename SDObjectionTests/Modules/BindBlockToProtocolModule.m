@@ -13,7 +13,7 @@
 
 @implementation BindBlockToProtocolModule
 
-- (void)configure:(JSObjectionInjector *)injector {
+- (void)configure {
 
     id (^block)(JSObjectionInjector *) = ^id(JSObjectionInjector *inj) {
         return [[SomeObject alloc] init];
