@@ -54,12 +54,17 @@ BOOL hasModuleWithName = [injector hasModuleWithName:name];
 ```
 Configure modules
 ```objective-c
-- (void)configure:(JSObjectionInjector *)injector {
-   // I have an injector, yay!
+- (void)configure {
+    [super configure];
+
    // Configure here
+
 }
 - (void)unload {
+   
    // Optional unloading here. Gets called, when module gets removed.
+ 
+   [super unload];
 }
 
 

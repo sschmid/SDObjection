@@ -6,4 +6,5 @@
 }
 
 - (id)initWithObject:(id)theObject;
+
 @end

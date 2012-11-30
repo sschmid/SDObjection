@@ -12,7 +12,7 @@
 
 @implementation RegisterEagerSingletonModule
 
-- (void)configure:(JSObjectionInjector *)injector {
+- (void)configure {
     [self registerEagerSingleton:[SomeObject class]];
 }
 

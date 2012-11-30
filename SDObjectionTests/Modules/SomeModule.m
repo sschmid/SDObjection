@@ -10,17 +10,15 @@
 
 @implementation SomeModule
 @synthesize unloaded = _unloaded;
-@synthesize injector = _injector;
 
 
-- (void)configure:(JSObjectionInjector *)injector {
+- (void)configure {
     self.unloaded = NO;
-    self.injector = injector;
 }
 
 - (void)unload {
     self.unloaded = YES;
-    self.injector = nil;
+    [super unload];
 }
 
 

@@ -2,14 +2,13 @@
 
 @class JSObjectionInjector;
 
-@interface JSObjectFactory : NSObject {
-    JSObjectionInjector *_injector;
-}
+@interface JSObjectFactory : NSObject
 
-@property (nonatomic, readonly, retain) JSObjectionInjector *injector;
+@property(nonatomic, readonly) JSObjectionInjector *injector;
 
 - (id)initWithInjector:(JSObjectionInjector *)injector;
 - (id)getObject:(id)classOrProtocol;
-- (id)objectForKeyedSubscript: (id)key;
+- (id)objectForKeyedSubscript:(id)key;
 - (id)getObjectWithArgs:(id)classOrProtocol, ... NS_REQUIRES_NIL_TERMINATION;
+
 @end

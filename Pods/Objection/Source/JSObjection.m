@@ -12,19 +12,19 @@ static JSObjectionInjector *gGlobalInjector;
         return [[[JSObjectionInjector alloc] init] autorelease];
     }
     @finally {
-        pthread_mutex_unlock(&gObjectionMutex); 
+        pthread_mutex_unlock(&gObjectionMutex);
     }
 
     return nil;
 }
 
-+ (void)initialize  {
++ (void)initialize {
     if (self == [JSObjection class]) {
         pthread_mutexattr_t mutexattr;
         pthread_mutexattr_init(&mutexattr);
         pthread_mutexattr_settype(&mutexattr, PTHREAD_MUTEX_RECURSIVE);
         pthread_mutex_init(&gObjectionMutex, &mutexattr);
-        pthread_mutexattr_destroy(&mutexattr);    
+        pthread_mutexattr_destroy(&mutexattr);
     }
 }
 
@@ -35,7 +35,7 @@ static JSObjectionInjector *gGlobalInjector;
     }
 }
 
-+ (JSObjectionInjector *) defaultInjector {  
++ (JSObjectionInjector *)defaultInjector {
     return [[gGlobalInjector retain] autorelease];
 }
 

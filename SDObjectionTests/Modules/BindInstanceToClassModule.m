@@ -11,7 +11,7 @@
 
 @implementation BindInstanceToClassModule
 
-- (void)configure:(JSObjectionInjector *)injector {
+- (void)configure {
     [self bind:[[SomeObject alloc] init] toClass:[SomeObject class]];
 }
 

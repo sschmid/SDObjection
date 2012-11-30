@@ -3,7 +3,7 @@
 
 @implementation JSObjectionProviderEntry
 
-- (id)initWithProvider:(id<JSObjectionProvider>)theProvider {
+- (id)initWithProvider:(id <JSObjectionProvider>)theProvider {
     if ((self = [super init])) {
         _provider = [theProvider retain];
     }
@@ -16,7 +16,7 @@
         _block = [theBlock copy];
     }
 
-    return self;  
+    return self;
 }
 
 - (id)extractObject:(NSArray *)arguments {

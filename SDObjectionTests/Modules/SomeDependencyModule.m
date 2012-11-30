@@ -11,7 +11,7 @@
 
 @implementation SomeDependencyModule
 
-- (void)configure:(JSObjectionInjector *)injector {
+- (void)configure {
     [self bind:[[SomeDependency alloc] init] toClass:[SomeDependency class]];
 }
 

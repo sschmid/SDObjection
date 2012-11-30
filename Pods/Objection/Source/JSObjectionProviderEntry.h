@@ -5,10 +5,11 @@
 @class JSObjectionInjector;
 
 @interface JSObjectionProviderEntry : JSObjectionEntry {
-    id<JSObjectionProvider> _provider;
+    id <JSObjectionProvider> _provider;
     id(^_block)(JSObjectionInjector *context);
 }
 
-- (id)initWithProvider:(id<JSObjectionProvider>)theProvider;
+- (id)initWithProvider:(id <JSObjectionProvider>)theProvider;
 - (id)initWithBlock:(id(^)(JSObjectionInjector *context))theBlock;
+
 @end

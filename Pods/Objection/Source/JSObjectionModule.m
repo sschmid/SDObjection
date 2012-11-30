@@ -5,8 +5,7 @@
 #import "JSObjectionInjector.h"
 #import "Objection.h"
 
-@interface __JSClassProvider : NSObject<JSObjectionProvider>
-{
+@interface __JSClassProvider : NSObject <JSObjectionProvider> {
     Class _class;
 }
 - (id)initWithClass:(Class)aClass;
@@ -27,14 +26,17 @@
 
 @end
 
-@interface JSObjectionModule()
+@interface JSObjectionModule ()
 - (NSString *)protocolKey:(Protocol *)aProtocol;
+
 - (void)ensureInstance:(id)instance conformsTo:(Protocol *)aProtocol;
 @end
 
 @implementation JSObjectionModule
+@synthesize injector = _injector;
 @synthesize bindings = _bindings;
 @synthesize eagerSingletons = _eagerSingletons;
+
 
 - (id)init {
     if ((self = [super init])) {
@@ -46,38 +48,38 @@
 
 - (void)bindMetaClass:(Class)metaClass toProtocol:(Protocol *)aProtocol {
     if (!class_isMetaClass(object_getClass(metaClass))) {
-        @throw [NSException exceptionWithName:@"JSObjectionException" 
+        @throw [NSException exceptionWithName:@"JSObjectionException"
                                        reason:[NSString stringWithFormat:@"\"%@\" can not be bound to the protocol \"%@\" because it is not a meta class", metaClass, NSStringFromProtocol(aProtocol)]
                                      userInfo:nil];
-    }    
+    }
     NSString *key = [self protocolKey:aProtocol];
     JSObjectionBindingEntry *entry = [[[JSObjectionBindingEntry alloc] initWithObject:metaClass] autorelease];
-    [_bindings setObject:entry forKey:key];    
+    [_bindings setObject:entry forKey:key];
 }
 
-- (void) bind:(id)instance toProtocol:(Protocol *)aProtocol {
-    [self ensureInstance: instance conformsTo: aProtocol];
+- (void)bind:(id)instance toProtocol:(Protocol *)aProtocol {
+    [self ensureInstance:instance conformsTo:aProtocol];
     NSString *key = [self protocolKey:aProtocol];
     JSObjectionBindingEntry *entry = [[[JSObjectionBindingEntry alloc] initWithObject:instance] autorelease];
-    [_bindings setObject:entry forKey:key];  
+    [_bindings setObject:entry forKey:key];
 }
 
-- (void) bind:(id)instance toClass:(Class)aClass  {
+- (void)bind:(id)instance toClass:(Class)aClass {
     NSString *key = NSStringFromClass(aClass);
     JSObjectionBindingEntry *entry = [[[JSObjectionBindingEntry alloc] initWithObject:instance] autorelease];
     [_bindings setObject:entry forKey:key];
 }
 
-- (void)bindProvider:(id<JSObjectionProvider>)provider toClass:(Class)aClass {
+- (void)bindProvider:(id <JSObjectionProvider>)provider toClass:(Class)aClass {
     NSString *key = NSStringFromClass(aClass);
     JSObjectionProviderEntry *entry = [[[JSObjectionProviderEntry alloc] initWithProvider:provider] autorelease];
-    [_bindings setObject:entry forKey:key];  
+    [_bindings setObject:entry forKey:key];
 }
 
-- (void)bindProvider:(id<JSObjectionProvider>)provider toProtocol:(Protocol *)aProtocol {
+- (void)bindProvider:(id <JSObjectionProvider>)provider toProtocol:(Protocol *)aProtocol {
     NSString *key = [self protocolKey:aProtocol];
     JSObjectionProviderEntry *entry = [[[JSObjectionProviderEntry alloc] initWithProvider:provider] autorelease];
-    [_bindings setObject:entry forKey:key];  
+    [_bindings setObject:entry forKey:key];
 }
 
 - (void)bindClass:(Class)aClass toProtocol:(Protocol *)aProtocol asSingleton:(BOOL)singleton {
@@ -99,13 +101,13 @@
 - (void)bindBlock:(id (^)(JSObjectionInjector *context))block toClass:(Class)aClass {
     NSString *key = NSStringFromClass(aClass);
     JSObjectionProviderEntry *entry = [[[JSObjectionProviderEntry alloc] initWithBlock:block] autorelease];
-    [_bindings setObject:entry forKey:key];    
+    [_bindings setObject:entry forKey:key];
 }
 
 - (void)bindBlock:(id (^)(JSObjectionInjector *context))block toProtocol:(Protocol *)aProtocol {
     NSString *key = [self protocolKey:aProtocol];
     JSObjectionProviderEntry *entry = [[[JSObjectionProviderEntry alloc] initWithBlock:block] autorelease];
-    [_bindings setObject:entry forKey:key];    
+    [_bindings setObject:entry forKey:key];
 }
 
 - (void)registerSingleton:(Class)aClass {
@@ -118,10 +120,12 @@
     [_bindings setObject:[JSObjectionInjectorEntry entryWithClass:aClass lifeCycle:JSObjectionInstantiationRuleSingleton] forKey:key];
 }
 
-- (void)configure:(JSObjectionInjector *)injector {
+- (void)configure {
 }
 
 - (void)unload {
+    [_injector release];
+    _injector = nil;
 }
 
 - (void)reset {
@@ -131,8 +135,12 @@
 }
 
 - (void)dealloc {
-    [_bindings release]; _bindings = nil;
-    [_eagerSingletons release]; _eagerSingletons = nil;
+    [_bindings release];
+    _bindings = nil;
+    [_eagerSingletons release];
+    _eagerSingletons = nil;
+    [_injector release];
+    _injector = nil;
     [super dealloc];
 }
 
@@ -140,15 +148,15 @@
 #pragma mark -
 
 - (void)ensureInstance:(id)instance conformsTo:(Protocol *)aProtocol {
-      if (![instance conformsToProtocol:aProtocol]) {
-            @throw [NSException exceptionWithName:@"JSObjectionException" 
-                                           reason:[NSString stringWithFormat:@"Instance does not conform to the %@ protocol", NSStringFromProtocol(aProtocol)] 
-                                         userInfo:nil];
-      }  
+    if (![instance conformsToProtocol:aProtocol]) {
+        @throw [NSException exceptionWithName:@"JSObjectionException"
+                                       reason:[NSString stringWithFormat:@"Instance does not conform to the %@ protocol", NSStringFromProtocol(aProtocol)]
+                                     userInfo:nil];
+    }
 }
 
 - (NSString *)protocolKey:(Protocol *)aProtocol {
-    return [NSString stringWithFormat:@"<%@>", NSStringFromProtocol(aProtocol)]; 
+    return [NSString stringWithFormat:@"<%@>", NSStringFromProtocol(aProtocol)];
 }
 
 @end

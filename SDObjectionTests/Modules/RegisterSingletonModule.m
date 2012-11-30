@@ -11,7 +11,7 @@
 
 @implementation RegisterSingletonModule
 
-- (void)configure:(JSObjectionInjector *)injector {
+- (void)configure {
     [self registerSingleton:[SomeObject class]];
 }
 

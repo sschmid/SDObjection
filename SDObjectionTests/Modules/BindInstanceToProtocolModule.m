@@ -12,7 +12,7 @@
 
 @implementation BindInstanceToProtocolModule
 
-- (void)configure:(JSObjectionInjector *)injector {
+- (void)configure {
     [self bind:[[SomeObject alloc] init] toProtocol:@protocol(SomeObjectProtocol)];
 }
 

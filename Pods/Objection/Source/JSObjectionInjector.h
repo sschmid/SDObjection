@@ -2,15 +2,15 @@
 #import "JSObjectionModule.h"
 
 @interface JSObjectionInjector : NSObject {
-      NSMutableDictionary *_context;
-      NSMutableSet *_eagerSingletons;
-      NSMutableDictionary *_modules;
+    NSMutableDictionary *_context;
+    NSMutableSet *_eagerSingletons;
+    NSMutableDictionary *_modules;
 }
 
 - (id)getObject:(id)classOrProtocol;
 - (id)getObjectWithArgs:(id)classOrProtocol, ... NS_REQUIRES_NIL_TERMINATION;
 - (id)getObject:(id)classOrProtocol arguments:(va_list)argList;
-- (id)objectForKeyedSubscript: (id)key;
+- (id)objectForKeyedSubscript:(id)key;
 
 - (void)addModule:(JSObjectionModule *)module;
 - (void)addModules:(NSArray *)modules;

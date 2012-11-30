@@ -4,35 +4,20 @@
 #import "JSObjectionUtils.h"
 #import "Objection.h"
 
-@interface __JSObjectionInjectorDefaultModule : JSObjectionModule {
-    JSObjectionInjector *_injector;
-}
+@interface __JSObjectionInjectorDefaultModule : JSObjectionModule
 @end
 
 @implementation __JSObjectionInjectorDefaultModule
 
-- (id)initWithInjector:(JSObjectionInjector *)injector {
-    if ((self = [super init])) {
-        _injector = [injector retain];
-    }
-    return self;
+- (void)configure {
+    [self bind:[[[JSObjectFactory alloc] initWithInjector:self.injector] autorelease] toClass:[JSObjectFactory class]];
 }
 
-- (void)configure:(JSObjectionInjector *)injector {
-    [self bind:[[[JSObjectFactory alloc] initWithInjector:_injector] autorelease] toClass:[JSObjectFactory class]];
-}
-
-- (void)dealloc {
-    [_injector release];
-    [super dealloc];
-}
 @end
 
 @interface JSObjectionInjector (Private)
 - (void)initializeEagerSingletons;
-
 - (void)configureDefaultModule;
-
 - (void)configureModule:(JSObjectionModule *)module;
 @end
 
@@ -108,15 +93,17 @@
 }
 
 - (void)configureModule:(JSObjectionModule *)module {
-    [module configure:self];
+    module.injector = self;
+    [module configure];
     for (NSString *singleton in module.eagerSingletons)
         [_eagerSingletons addObject:singleton];
     [_context addEntriesFromDictionary:module.bindings];
 }
 
 - (void)configureDefaultModule {
-    __JSObjectionInjectorDefaultModule *module = [[[__JSObjectionInjectorDefaultModule alloc] initWithInjector:self] autorelease];
+    __JSObjectionInjectorDefaultModule *module = [[__JSObjectionInjectorDefaultModule alloc] init];
     [self addModule:module];
+    [module release];
 }
 
 #pragma mark - 
@@ -158,8 +145,8 @@
 - (void)removeModuleWithName:(NSString *)name {
     JSObjectionModule *module = [_modules objectForKey:name];
     if (module) {
-        [self unConfigureModule:module];
         [module unload];
+        [self unConfigureModule:module];
         [_modules removeObjectForKey:name];
     }
 }

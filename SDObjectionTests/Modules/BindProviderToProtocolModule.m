@@ -12,7 +12,7 @@
 
 @implementation BindProviderToProtocolModule
 
-- (void)configure:(JSObjectionInjector *)injector {
+- (void)configure {
     [self bindProvider:[[SomeProvider alloc] init] toProtocol:@protocol(SomeObjectProtocol)];
 }
 

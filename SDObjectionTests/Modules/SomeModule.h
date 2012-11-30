@@ -11,5 +11,4 @@
 
 @interface SomeModule : JSObjectionModule
 @property(nonatomic) BOOL unloaded;
-@property(nonatomic, weak) JSObjectionInjector *injector;
 @end

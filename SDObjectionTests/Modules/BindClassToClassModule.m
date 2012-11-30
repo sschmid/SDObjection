@@ -12,7 +12,7 @@
 
 @implementation BindClassToClassModule
 
-- (void)configure:(JSObjectionInjector *)injector {
+- (void)configure {
     [self bindClass:[SomeObject class] toClass:[SomeOtherObject class] asSingleton:NO];
 }
 
