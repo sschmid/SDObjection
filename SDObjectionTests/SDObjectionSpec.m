@@ -111,6 +111,18 @@ SPEC_BEGIN(SDObjectionSpec)
                     [[theValue(has) should] beNo];
                 });
 
+                it(@"removes module instance", ^{
+                    NSString *name = @"theModule";
+                    SomeModule *aModule = [[SomeModule alloc] init];
+                    [injector addModule:aModule withName:name];
+                    [injector removeModuleInstance:aModule];
+                    BOOL hasName = [injector hasModuleWithName:name];
+                    BOOL hasClass = [injector hasModuleClass:[SomeModule class]];
+
+                    [[theValue(hasName) should] beNo];
+                    [[theValue(hasClass) should] beNo];
+                });
+                
                 it(@"has no module with injector", ^{
                     SomeModule *someModule = [[SomeModule alloc] init];
                     [injector addModule:someModule];
@@ -196,7 +208,6 @@ SPEC_BEGIN(SDObjectionSpec)
                 });
 
             });
-
 
             context(@"when bind instance to class", ^{
 
