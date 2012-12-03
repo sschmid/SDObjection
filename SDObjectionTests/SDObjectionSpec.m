@@ -111,6 +111,18 @@ SPEC_BEGIN(SDObjectionSpec)
                     [[theValue(has) should] beNo];
                 });
 
+                it(@"removes module instance", ^{
+                    NSString *name = @"theModule";
+                    SomeModule *aModule = [[SomeModule alloc] init];
+                    [injector addModule:aModule withName:name];
+                    [injector removeModuleInstance:aModule];
+                    BOOL hasName = [injector hasModuleWithName:name];
+                    BOOL hasClass = [injector hasModuleClass:[SomeModule class]];
+
+                    [[theValue(hasName) should] beNo];
+                    [[theValue(hasClass) should] beNo];
+                });
+                
                 it(@"has no module with injector", ^{
                     SomeModule *someModule = [[SomeModule alloc] init];
                     [injector addModule:someModule];
@@ -185,8 +197,17 @@ SPEC_BEGIN(SDObjectionSpec)
                     [[module.eagerSingletons should] beEmpty];
                 });
 
-            });
+                it(@"can retrieve objects from context in module.unload", ^{
+                    SomeModule *module = [[SomeModule alloc] init];
+                    [injector addModule:module];
+                    [injector removeModuleClass:[module class]];
+                    BOOL has = module.unloadObj != nil;
 
+                    [[theValue(has) should] beYes];
+
+                });
+
+            });
 
             context(@"when bind instance to class", ^{
 

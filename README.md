@@ -43,6 +43,8 @@ Add modules
 ```
 Remove modules
 ```objective-c
+removeModuleInstance
+[injector removeModuleInstance:someModule];
 [injector removeModuleClass:[SomeModule class]];
 [injector removeModuleWithName:@"otherModule"];
 [injector removeAllModules];

@@ -138,6 +138,21 @@
         [_modules setObject:module forKey:name];
 }
 
+- (void)removeModuleInstance:(JSObjectionModule *)module {
+    JSObjectionModule *existingModule;
+    NSMutableDictionary *modules = [_modules copy];
+    for (JSObjectionModule *moduleKey in modules) {
+        existingModule = [_modules objectForKey:moduleKey];
+        if (existingModule == module) {
+            [existingModule unload];
+            [self unConfigureModule:existingModule];
+            [_modules removeObjectForKey:moduleKey];
+            break;
+        }
+    }
+    [modules release];
+}
+
 - (void)removeModuleClass:(Class)aClass {
     [self removeModuleWithName:NSStringFromClass(aClass)];
 }

@@ -16,6 +16,7 @@
 - (void)addModules:(NSArray *)modules;
 - (void)addModule:(JSObjectionModule *)module withName:(NSString *)name;
 
+- (void)removeModuleInstance:(JSObjectionModule *)module;
 - (void)removeModuleClass:(Class)aClass;
 - (void)removeModuleWithName:(NSString *)name;
 - (void)removeAllModules;
@@ -24,6 +25,5 @@
 - (BOOL)hasModuleWithName:(NSString *)name;
 
 - (void)dumpContext;
-
 
 @end
