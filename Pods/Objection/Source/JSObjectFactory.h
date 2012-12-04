@@ -1,6 +1,5 @@
 #import <Foundation/Foundation.h>
-
-@class JSObjectionInjector;
+#import "JSObjectionInjector.h"
 
 @interface JSObjectFactory : NSObject
 

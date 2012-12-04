@@ -106,8 +106,6 @@
     [module release];
 }
 
-#pragma mark - 
-
 - (void)dealloc {
     [_context release];
     [_eagerSingletons release];
@@ -141,16 +139,20 @@
 - (void)removeModuleInstance:(JSObjectionModule *)module {
     JSObjectionModule *existingModule;
     NSMutableDictionary *modules = [_modules copy];
-    for (JSObjectionModule *moduleKey in modules) {
+    for (NSString *moduleKey in modules) {
         existingModule = [_modules objectForKey:moduleKey];
         if (existingModule == module) {
-            [existingModule unload];
-            [self unConfigureModule:existingModule];
-            [_modules removeObjectForKey:moduleKey];
+            [self destroyModule:existingModule withKey:moduleKey];
             break;
         }
     }
     [modules release];
+}
+
+- (void)destroyModule:(JSObjectionModule *)module withKey:(NSString *)key {
+    [module unload];
+    [self unConfigureModule:module];
+    [_modules removeObjectForKey:key];
 }
 
 - (void)removeModuleClass:(Class)aClass {
@@ -159,11 +161,8 @@
 
 - (void)removeModuleWithName:(NSString *)name {
     JSObjectionModule *module = [_modules objectForKey:name];
-    if (module) {
-        [module unload];
-        [self unConfigureModule:module];
-        [_modules removeObjectForKey:name];
-    }
+    if (module)
+        [self destroyModule:module withKey:name];
 }
 
 - (void)removeAllModules {
@@ -192,19 +191,17 @@
 - (void)removeAutoRegisteredModules:(id)entry {
     if ([entry isKindOfClass:[JSObjectionInjectorEntry class]])
         for (JSObjectionModule *module in ((JSObjectionInjectorEntry *) entry).autoRegisteredModules)
-            [self unConfigureModule:module];
+            [self removeModuleInstance:module];
 }
 
 - (void)dumpContext {
-    NSLog(@"JSObjectionInjector context:::");
+    NSLog(@"Context of Injector: %@", self);
     JSObjectionModule *module;
     for (NSString *moduleKey in _modules) {
         module = [_modules objectForKey:moduleKey];
-        for (NSString *bindingKey in module.bindings) {
+        for (NSString *bindingKey in module.bindings)
             NSLog(@"- %@ : %@", bindingKey, [module.bindings objectForKey:bindingKey]);
-        }
     }
-    NSLog(@"JSObjection end:::");
 }
 
 @end

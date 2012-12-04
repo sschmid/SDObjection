@@ -16,7 +16,6 @@
 
 
 #pragma mark Instance Methods
-#pragma mark -
 
 - (id)initWithClass:(Class)theClass lifeCycle:(JSObjectionInstantiationRule)theLifeCycle {
     if ((self = [super init])) {
@@ -45,7 +44,6 @@
 }
 
 
-#pragma mark -
 #pragma mark Private Methods
 
 - (void)notifyObjectThatItIsReady:(id)object {
@@ -118,7 +116,6 @@
 }
 
 #pragma mark Class Methods
-#pragma mark -
 
 + (id)entryWithClass:(Class)theClass lifeCycle:(JSObjectionInstantiationRule)theLifeCycle {
     return [[[JSObjectionInjectorEntry alloc] initWithClass:theClass lifeCycle:theLifeCycle] autorelease];
