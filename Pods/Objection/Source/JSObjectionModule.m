@@ -145,7 +145,6 @@
 }
 
 #pragma mark Private
-#pragma mark -
 
 - (void)ensureInstance:(id)instance conformsTo:(Protocol *)aProtocol {
     if (![instance conformsToProtocol:aProtocol]) {

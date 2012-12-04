@@ -1,5 +1,4 @@
 #import "JSObjectFactory.h"
-#import "Objection.h"
 
 @interface JSObjectFactory ()
 @property(nonatomic, readwrite, retain) JSObjectionInjector *injector;
