@@ -23,7 +23,6 @@
 #import "RegisterEagerSingletonModule.h"
 #import "RegisterSingletonModule.h"
 #import "StartModule.h"
-#import "SomeDependencyModule.h"
 
 SPEC_BEGIN(SDObjectionSpec)
 
