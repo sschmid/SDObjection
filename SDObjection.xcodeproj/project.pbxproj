@@ -14,6 +14,7 @@
 		8D4DF2A2159CAB0B6F193F55 /* SomeDependencyModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF8566E7F155C934A8910 /* SomeDependencyModule.m */; };
 		8D4DF2C592CC1909E73591EE /* BindClassToClassModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF0F22BC564C131029327 /* BindClassToClassModule.m */; };
 		8D4DF2FA1C1B0C01D36FEB05 /* RegisterEagerSingletonModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF265C5F7AF860D4249CC /* RegisterEagerSingletonModule.m */; };
+		8D4DF4BF2D090076644BC713 /* StartModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DFE84C099159DA7C4B0D0 /* StartModule.m */; };
 		8D4DF568E4C4C837BC202A7E /* BindBlockToClassModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DFC2680ECB2E1F612971E /* BindBlockToClassModule.m */; };
 		8D4DF57318702F9AC51F82FF /* BindInstanceToClassModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF0F7FC6CF0B7EE72516D /* BindInstanceToClassModule.m */; };
 		8D4DF5A6FC3FE0AEF1E3A674 /* SomeDependency.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF81B326A2B016F5E8701 /* SomeDependency.m */; };
@@ -64,6 +65,7 @@
 		8D4DF12695AD2B19CBC412EE /* SomeModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomeModule.m; sourceTree = "<group>"; };
 		8D4DF265C5F7AF860D4249CC /* RegisterEagerSingletonModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterEagerSingletonModule.m; sourceTree = "<group>"; };
 		8D4DF275A44A45F86796E93C /* BindBlockToProtocolModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindBlockToProtocolModule.h; sourceTree = "<group>"; };
+		8D4DF296145A096CD80613AD /* StartModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartModule.h; sourceTree = "<group>"; };
 		8D4DF2ABE1F463D035E6A7E8 /* BindClassToProtocolSingletonModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindClassToProtocolSingletonModule.h; sourceTree = "<group>"; };
 		8D4DF36BA07725FA13D19DD4 /* SomeProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomeProvider.m; sourceTree = "<group>"; };
 		8D4DF3EA518D41AD817E09E6 /* SomeDependencyModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeDependencyModule.h; sourceTree = "<group>"; };
@@ -92,6 +94,7 @@
 		8D4DFC80A62CD6B7D607279F /* SomeOtherDependency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomeOtherDependency.m; sourceTree = "<group>"; };
 		8D4DFD854849B57AE7BCCD58 /* SomeOtherObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomeOtherObject.m; sourceTree = "<group>"; };
 		8D4DFDAD742036552D957BC3 /* BindProviderToProtocolModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BindProviderToProtocolModule.m; sourceTree = "<group>"; };
+		8D4DFE84C099159DA7C4B0D0 /* StartModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartModule.m; sourceTree = "<group>"; };
 		8D4DFED44A130BDD4176D482 /* SomeDependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeDependency.h; sourceTree = "<group>"; };
 		8D4DFEFC67D79F599B67470C /* RegisterSingletonModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterSingletonModule.h; sourceTree = "<group>"; };
 		8D4DFF358019400B93D82804 /* BindClassToClassModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BindClassToClassModule.h; sourceTree = "<group>"; };
@@ -195,6 +198,8 @@
 				8D4DF8566E7F155C934A8910 /* SomeDependencyModule.m */,
 				8D4DFFAD82F8F90FBC6002F7 /* SomeModule.h */,
 				8D4DF12695AD2B19CBC412EE /* SomeModule.m */,
+				8D4DFE84C099159DA7C4B0D0 /* StartModule.m */,
+				8D4DF296145A096CD80613AD /* StartModule.h */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -445,6 +450,7 @@
 				8D4DF6C27E8F6DEE000C6B44 /* SomeProvider.m in Sources */,
 				8D4DFBA73C6A667FC8220698 /* SomeSingleton.m in Sources */,
 				8D4DFEC1E80DDD50EA6EDDC6 /* SomeModule.m in Sources */,
+				8D4DF4BF2D090076644BC713 /* StartModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

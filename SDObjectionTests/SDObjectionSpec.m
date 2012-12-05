@@ -22,6 +22,7 @@
 #import "BindBlockToClassModule.h"
 #import "RegisterEagerSingletonModule.h"
 #import "RegisterSingletonModule.h"
+#import "StartModule.h"
 
 SPEC_BEGIN(SDObjectionSpec)
 
@@ -130,6 +131,14 @@ SPEC_BEGIN(SDObjectionSpec)
                     BOOL has = someModule.injector != nil;
 
                     [[theValue(has) should] beNo];
+                });
+
+                it(@"starts module with its bindings ready", ^{
+                    StartModule *startModule = [[StartModule alloc] init];
+                    [injector addModule:startModule];
+
+                    [startModule.someObject shouldNotBeNil];
+                    [[startModule.someObject should] beKindOfClass:[SomeObject class]];
                 });
 
                 it(@"module is not unloaded", ^{
