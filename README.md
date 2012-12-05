@@ -1,11 +1,8 @@
-Description
-===========
+##Description
 
 SDObjection is modified version of [Objection] - a lightweight dependency injection framework for Objective-C for MacOS X and iOS. For those of you that have used Guice objection will feel familiar. Objection was built to stay out of your way and alleviate the need to maintain a large XML container or manually construct objects.
 
-
-Features
-========
+##Features
 
 * "Annotation" Based Dependency Injection
 * Seamless support for integrating custom and external dependencies
@@ -19,111 +16,107 @@ Features
   * Default and custom arguments
 
 
-What's new
-==========
-* No global context anymore
+##What's different from [Objection]
+
+* No global context
 * No objection_register or objection_register_singleton
  * This is handled automatically in modules
 * Injector lets you add and remove modules at any time
 * Removing modules also remove their bindings
 
+##Using Objection
 
-Using Objection
-===============
+####Create an injector
 
-Create an injector
 ```objective-c
 JSObjectionInjector *injector = [JSObjection createInjector];
 [JSObjection setDefaultInjector:injector];
 ```
-Add modules
+
+####Add modules
+
 ```objective-c
 [injector addModule:[[SomeModule alloc] init]];
 [injector addModule:[[SomeOtherModule alloc] init] withName:@"otherModule"];
 ```
-Remove modules
+
+####Remove modules
+
 ```objective-c
-removeModuleInstance
 [injector removeModuleInstance:someModule];
 [injector removeModuleClass:[SomeModule class]];
 [injector removeModuleWithName:@"otherModule"];
 [injector removeAllModules];
 ```
-Ask
+
+####Ask
+
 ```objective-c
 BOOL hasModule = [injector hasModuleClass:[SomeModule class]];
 BOOL hasModuleWithName = [injector hasModuleWithName:name];
 ```
-Configure modules
+
+####Configure modules
+
 ```objective-c
 - (void)configure {
     [super configure];
 
    // Configure here
 
+   [self bindClass:[Foo class] toProtocol:@protocol(FooProtocol) asSingleton:YES];
+   [self bind:[[Bar alloc] init] toProtocol:@protocol(BarProtocol)];
+   [self registerSingleton:[SingleFoo class]];
+   [self registerEagerSingleton:[EagerBar class]];
+   
+   // there are many more binding options...
 }
 
 - (void)start {
     [super start];
 
     // All configured bindings are ready to use
-    self.someObject = [self.injector getObject:[SomeObject class]];
-    [self.someObject doSomeThing];
-
+    [[self.injector getObject:@protocol(BarProtocol)] bar];
+    [[self.injector getObject:[SingleFoo class]] foo];
 }
 
 - (void)unload {
    
-   // Optional unloading here. Gets called, when module gets removed.
+   // Optional unloading here. Gets called, when modules get removed.
+   // All configured bindings will get removed automatically.
  
    [super unload];
 }
-
-
-// Like this
-[self bindClass:[SomeObject class] toProtocol:@protocol(SomeObjectProtocol) asSingleton:YES];
-
-// or
-[self bind:[[SomeObject alloc] init] toProtocol:@protocol(SomeObjectProtocol)];
-
-//or
-[self registerSingleton:[SomeObject class]];
-
-//or
-[self registerEagerSingleton:[SomeObject class]];
-
-//and many more
 ```
 
-
-Use SDObjection in your project
-===============================
+##Use SDObjection in your project
 
 You find the source files you need in Pods/Objection/Source
 
 To use SDObjection with ARC, you might want to set it up with [CocoaPods] like this:
 
 Create a Podfile and put it into your root folder of your project
-Podfile
+
+####Edit your Podfile
 ```
 platform :ios, '5.0'
 
 pod 'SDObjection'
 ```
 
-Setup [CocoaPods], if not done already
+####Setup [CocoaPods], if not done already
 
 ```
 $ sudo gem install cocoapods
 $ pod setup
 ```
 
-Add this remote
+####Add this remote
 ```
 $ pod repo add sschmid-cocoapods-specs https://github.com/sschmid/cocoapods-specs
 ```
 
-Install SDObjection
+####Install SDObjection
 ```
 $ cd path/to/project
 $ pod install
