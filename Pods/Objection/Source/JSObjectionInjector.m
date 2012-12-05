@@ -98,6 +98,7 @@
     for (NSString *singleton in module.eagerSingletons)
         [_eagerSingletons addObject:singleton];
     [_context addEntriesFromDictionary:module.bindings];
+    [module start];
 }
 
 - (void)configureDefaultModule {

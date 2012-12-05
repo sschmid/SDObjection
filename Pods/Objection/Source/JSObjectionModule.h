@@ -30,6 +30,7 @@
 - (void)registerEagerSingleton:(Class)aClass;
 
 - (void)configure;
+- (void)start;
 - (void)unload;
 
 - (void)reset;

@@ -123,6 +123,10 @@
 - (void)configure {
 }
 
+- (void)start {
+
+}
+
 - (void)unload {
     [_injector release];
     _injector = nil;
