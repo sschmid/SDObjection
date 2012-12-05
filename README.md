@@ -62,6 +62,16 @@ Configure modules
    // Configure here
 
 }
+
+- (void)start {
+    [super start];
+
+    // All configured bindings are ready to use
+    self.someObject = [self.injector getObject:[SomeObject class]];
+    [self.someObject doSomeThing];
+
+}
+
 - (void)unload {
    
    // Optional unloading here. Gets called, when module gets removed.
