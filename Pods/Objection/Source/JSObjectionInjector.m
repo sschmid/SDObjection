@@ -101,14 +101,10 @@
             id dependency = [self getObject:desiredClassOrProtocol];
 
             if (dependency == nil && propertyInfo.type == JSObjectionTypeClass) {
-                JSObjectionModule *module = [[JSObjectionModule alloc] init];
-                [module bindClass:desiredClassOrProtocol toClass:desiredClassOrProtocol asSingleton:NO];
-                [self addModule:module];
-
-                dependency = [self getObject:desiredClassOrProtocol];
-
-                [self removeModuleInstance:module];
-                [module release];
+                JSObjectionInjectorEntry *entry = [[JSObjectionInjectorEntry entryWithClass:desiredClassOrProtocol lifeCycle:JSObjectionInstantiationRuleNormal] retain];
+                dependency = [entry extractObject:nil];
+                [self injectIntoObject:dependency];
+                [entry release];
             } else if (!dependency) {
                 @throw [NSException exceptionWithName:@"JSObjectionException"
                                                reason:[NSString stringWithFormat:@"Cannot find an instance that is bound to the protocol '%@' to assign to the property '%@'", NSStringFromProtocol(desiredClassOrProtocol), propertyName]
