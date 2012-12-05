@@ -66,7 +66,14 @@
 
         if (classOrProtocol && injectorEntry) {
             NSArray *arguments = JSObjectionUtils.transformVariadicArgsToArray(argList);
-            return [injectorEntry extractObject:arguments];
+            if ([injectorEntry isKindOfClass:[JSObjectionInjectorEntry class]]) {
+                id object = [injectorEntry extractObject:arguments];
+                [self injectIntoObject:object];
+                return object;
+            } else {
+                return [injectorEntry extractObject:arguments];
+            }
+
         }
 
         return nil;
@@ -76,6 +83,109 @@
 
 }
 
+- (void)injectIntoObject:(id)object {
+    if ([[object class] respondsToSelector:@selector(objectionRequires)]) {
+        NSArray *properties = [[object class] performSelector:@selector(objectionRequires)];
+        NSMutableDictionary *propertiesDictionary = [NSMutableDictionary dictionaryWithCapacity:properties.count];
+
+        for (NSString *propertyName in properties) {
+            objc_property_t property = JSObjectionUtils.propertyForClass([object class], propertyName);
+            JSObjectionPropertyInfo propertyInfo = JSObjectionUtils.findClassOrProtocolForProperty(property);
+            id desiredClassOrProtocol = propertyInfo.value;
+            // Ensure that the class is initialized before attempting to retrieve it.
+            // Using +load would force all registered classes to be initialized so we are
+            // lazily initializing them.
+            if (propertyInfo.type == JSObjectionTypeClass)
+                [desiredClassOrProtocol class];
+
+            id dependency = [self getObject:desiredClassOrProtocol];
+
+            if (dependency == nil && propertyInfo.type == JSObjectionTypeClass) {
+                JSObjectionModule *module = [[JSObjectionModule alloc] init];
+                [module bindClass:desiredClassOrProtocol toClass:desiredClassOrProtocol asSingleton:NO];
+                [self addModule:module];
+
+                dependency = [self getObject:desiredClassOrProtocol];
+
+                [self removeModuleInstance:module];
+                [module release];
+            } else if (!dependency) {
+                @throw [NSException exceptionWithName:@"JSObjectionException"
+                                               reason:[NSString stringWithFormat:@"Cannot find an instance that is bound to the protocol '%@' to assign to the property '%@'", NSStringFromProtocol(desiredClassOrProtocol), propertyName]
+                                             userInfo:nil];
+            }
+
+            [propertiesDictionary setObject:dependency forKey:propertyName];
+        }
+
+        [object setValuesForKeysWithDictionary:propertiesDictionary];
+
+        if ([object respondsToSelector:@selector(awakeFromObjection)]) {
+            [object performSelector:@selector(awakeFromObjection)];
+        }
+    }
+}
+
+- (void)addModule:(JSObjectionModule *)module {
+    [self addModule:module withName:NSStringFromClass([module class])];
+}
+
+- (void)addModules:(NSArray *)modules {
+    for (JSObjectionModule *module in modules) {
+        [self registerModule:module name:NSStringFromClass([module class])];
+        [self configureModule:module];
+    }
+    [self initializeEagerSingletons];
+}
+
+- (void)addModule:(JSObjectionModule *)module withName:(NSString *)name {
+    [self registerModule:module name:name];
+    [self configureModule:module];
+    [self initializeEagerSingletons];
+}
+
+- (void)removeModuleInstance:(JSObjectionModule *)module {
+    JSObjectionModule *existingModule;
+    NSMutableDictionary *modules = [_modules copy];
+    for (NSString *moduleKey in modules) {
+        existingModule = [_modules objectForKey:moduleKey];
+        if (existingModule == module) {
+            [self destroyModule:existingModule withKey:moduleKey];
+            break;
+        }
+    }
+    [modules release];
+}
+
+- (void)removeModuleClass:(Class)aClass {
+    [self removeModuleWithName:NSStringFromClass(aClass)];
+}
+
+- (void)removeModuleWithName:(NSString *)name {
+    JSObjectionModule *module = [_modules objectForKey:name];
+    if (module)
+        [self destroyModule:module withKey:name];
+}
+
+- (void)removeAllModules {
+    for (NSString *moduleKey in [_modules allKeys])
+        [self removeModuleWithName:moduleKey];
+}
+
+- (BOOL)hasModuleClass:(Class)aClass {
+    return [self hasModuleWithName:NSStringFromClass(aClass)];
+}
+
+- (BOOL)hasModuleWithName:(NSString *)name {
+    return [_modules objectForKey:name] != nil;
+}
+
+- (void)dealloc {
+    [_context release];
+    [_eagerSingletons release];
+    [_modules release];
+    [super dealloc];
+}
 
 #pragma mark - Private
 
@@ -107,81 +217,13 @@
     [module release];
 }
 
-- (void)dealloc {
-    [_context release];
-    [_eagerSingletons release];
-    [_modules release];
-    [super dealloc];
-}
-
-- (void)addModule:(JSObjectionModule *)module {
-    [self addModule:module withName:NSStringFromClass([module class])];
-}
-
-- (void)addModules:(NSArray *)modules {
-    for (JSObjectionModule *module in modules) {
-        [self registerModule:module name:NSStringFromClass([module class])];
-        [self configureModule:module];
-    }
-    [self initializeEagerSingletons];
-}
-
-- (void)addModule:(JSObjectionModule *)module withName:(NSString *)name {
-    [self registerModule:module name:name];
-    [self configureModule:module];
-    [self initializeEagerSingletons];
-}
-
 - (void)registerModule:(JSObjectionModule *)module name:(NSString *)name {
     if (![_modules objectForKey:name])
         [_modules setObject:module forKey:name];
 }
 
-- (void)removeModuleInstance:(JSObjectionModule *)module {
-    JSObjectionModule *existingModule;
-    NSMutableDictionary *modules = [_modules copy];
-    for (NSString *moduleKey in modules) {
-        existingModule = [_modules objectForKey:moduleKey];
-        if (existingModule == module) {
-            [self destroyModule:existingModule withKey:moduleKey];
-            break;
-        }
-    }
-    [modules release];
-}
-
-- (void)destroyModule:(JSObjectionModule *)module withKey:(NSString *)key {
-    [module unload];
-    [self unConfigureModule:module];
-    [_modules removeObjectForKey:key];
-}
-
-- (void)removeModuleClass:(Class)aClass {
-    [self removeModuleWithName:NSStringFromClass(aClass)];
-}
-
-- (void)removeModuleWithName:(NSString *)name {
-    JSObjectionModule *module = [_modules objectForKey:name];
-    if (module)
-        [self destroyModule:module withKey:name];
-}
-
-- (void)removeAllModules {
-    for (NSString *moduleKey in [_modules allKeys])
-        [self removeModuleWithName:moduleKey];
-}
-
-- (BOOL)hasModuleClass:(Class)aClass {
-    return [self hasModuleWithName:NSStringFromClass(aClass)];
-}
-
-- (BOOL)hasModuleWithName:(NSString *)name {
-    return [_modules objectForKey:name] != nil;
-}
-
 - (void)unConfigureModule:(JSObjectionModule *)module {
     for (NSString *bindingKey in module.bindings) {
-        [self removeAutoRegisteredModules:[_context objectForKey:bindingKey]];
         [_context removeObjectForKey:bindingKey];
     }
 
@@ -189,10 +231,10 @@
         [_eagerSingletons removeObject:singleton];
 }
 
-- (void)removeAutoRegisteredModules:(id)entry {
-    if ([entry isKindOfClass:[JSObjectionInjectorEntry class]])
-        for (JSObjectionModule *module in ((JSObjectionInjectorEntry *) entry).autoRegisteredModules)
-            [self removeModuleInstance:module];
+- (void)destroyModule:(JSObjectionModule *)module withKey:(NSString *)key {
+    [module unload];
+    [self unConfigureModule:module];
+    [_modules removeObjectForKey:key];
 }
 
 - (void)dumpContext {

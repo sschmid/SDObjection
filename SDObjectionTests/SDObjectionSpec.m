@@ -23,6 +23,7 @@
 #import "RegisterEagerSingletonModule.h"
 #import "RegisterSingletonModule.h"
 #import "StartModule.h"
+#import "SomeDependencyModule.h"
 
 SPEC_BEGIN(SDObjectionSpec)
 
@@ -214,6 +215,26 @@ SPEC_BEGIN(SDObjectionSpec)
 
                     [[theValue(has) should] beYes];
 
+                });
+
+                it(@"injects dependencies into existing object", ^{
+                    JSObjectionModule *testModule = [[JSObjectionModule alloc] init];
+                    [testModule registerSingleton:[SomeDependency class]];
+                    [injector addModule:testModule];
+
+                    SomeObject *someObject1 = [[SomeObject alloc] init];
+                    SomeObject *someObject2 = [[SomeObject alloc] init];
+
+                    [injector injectIntoObject:someObject1];
+                    [injector injectIntoObject:someObject2];
+
+                    [someObject1.dep shouldNotBeNil];
+                    [[someObject1.dep should] beKindOfClass:[SomeDependency class]];
+
+                    [someObject2.dep shouldNotBeNil];
+                    [[someObject2.dep should] beKindOfClass:[SomeDependency class]];
+
+                    [[someObject1.dep should] equal:someObject2.dep];
                 });
 
             });
