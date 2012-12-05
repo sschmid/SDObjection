@@ -1,9 +1,7 @@
 #import "JSObjectionInjectorEntry.h"
-#import "JSObjection.h"
 #import "JSObjectionUtils.h"
 
 @interface JSObjectionInjectorEntry ()
-- (void)notifyObjectThatItIsReady:(id)object;
 - (id)buildObject:(NSArray *)arguments;
 - (id)argumentsForObject:(NSArray *)givenArguments;
 - (SEL)initializerForObject;
@@ -12,7 +10,6 @@
 @implementation JSObjectionInjectorEntry
 @synthesize lifeCycle = _lifeCycle;
 @synthesize classEntry = _classEntry;
-@synthesize autoRegisteredModules = _autoRegisteredModules;
 
 
 #pragma mark Instance Methods
@@ -22,7 +19,6 @@
         _lifeCycle = theLifeCycle;
         _classEntry = theClass;
         _storageCache = nil;
-        _autoRegisteredModules = [[NSMutableArray alloc] init];
     }
 
     return self;
@@ -39,72 +35,24 @@
 - (void)dealloc {
     [_storageCache release];
     _storageCache = nil;
-    [_autoRegisteredModules release];
     [super dealloc];
 }
 
 
 #pragma mark Private Methods
 
-- (void)notifyObjectThatItIsReady:(id)object {
-    if ([object respondsToSelector:@selector(awakeFromObjection)]) {
-        [object performSelector:@selector(awakeFromObjection)];
-    }
-}
-
 - (id)buildObject:(NSArray *)arguments {
+    id object = nil;
 
-    id objectUnderConstruction = nil;
-    if ([self.classEntry respondsToSelector:@selector(objectionInitializer)]) {
-        objectUnderConstruction = JSObjectionUtils.buildObjectWithInitializer(self.classEntry, [self initializerForObject], [self argumentsForObject:arguments]);
-    } else {
-        objectUnderConstruction = [[[self.classEntry alloc] init] autorelease];
-    }
+    if ([self.classEntry respondsToSelector:@selector(objectionInitializer)])
+        object = JSObjectionUtils.buildObjectWithInitializer(self.classEntry, [self initializerForObject], [self argumentsForObject:arguments]);
+    else
+        object = [[[self.classEntry alloc] init] autorelease];
 
-    if (self.lifeCycle == JSObjectionInstantiationRuleSingleton) {
-        _storageCache = [objectUnderConstruction retain];
-    }
+    if (self.lifeCycle == JSObjectionInstantiationRuleSingleton)
+        _storageCache = [object retain];
 
-    if ([self.classEntry respondsToSelector:@selector(objectionRequires)]) {
-        NSArray *properties = [self.classEntry performSelector:@selector(objectionRequires)];
-        NSMutableDictionary *propertiesDictionary = [NSMutableDictionary dictionaryWithCapacity:properties.count];
-
-        for (NSString *propertyName in properties) {
-            objc_property_t property = JSObjectionUtils.propertyForClass(self.classEntry, propertyName);
-            JSObjectionPropertyInfo propertyInfo = JSObjectionUtils.findClassOrProtocolForProperty(property);
-            id desiredClassOrProtocol = propertyInfo.value;
-            // Ensure that the class is initialized before attempting to retrieve it.
-            // Using +load would force all registered classes to be initialized so we are
-            // lazily initializing them.
-            if (propertyInfo.type == JSObjectionTypeClass) {
-                [desiredClassOrProtocol class];
-            }
-
-            id theObject = [self.injector getObject:desiredClassOrProtocol];
-
-            if (theObject == nil && propertyInfo.type == JSObjectionTypeClass) {
-                JSObjectionModule *module = [[JSObjectionModule alloc] init];
-                [module bindClass:desiredClassOrProtocol toClass:desiredClassOrProtocol asSingleton:NO];
-
-                [_injector addModule:module withName:[NSString stringWithFormat:@"__autoRegisteredModule_%u", arc4random() % 10000000]];
-
-                [_autoRegisteredModules addObject:module];
-                [module release];
-                theObject = [_injector getObject:desiredClassOrProtocol];
-            } else if (!theObject) {
-                @throw [NSException exceptionWithName:@"JSObjectionException"
-                                               reason:[NSString stringWithFormat:@"Cannot find an instance that is bound to the protocol '%@' to assign to the property '%@'", NSStringFromProtocol(desiredClassOrProtocol), propertyName]
-                                             userInfo:nil];
-            }
-
-            [propertiesDictionary setObject:theObject forKey:propertyName];
-        }
-
-        [objectUnderConstruction setValuesForKeysWithDictionary:propertiesDictionary];
-    }
-
-    [self notifyObjectThatItIsReady:objectUnderConstruction];
-    return objectUnderConstruction;
+    return object;
 }
 
 - (SEL)initializerForObject {

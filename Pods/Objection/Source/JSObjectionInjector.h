@@ -12,6 +12,8 @@
 - (id)getObject:(id)classOrProtocol arguments:(va_list)argList;
 - (id)objectForKeyedSubscript:(id)key;
 
+- (void)injectIntoObject:(id)object;
+
 - (void)addModule:(JSObjectionModule *)module;
 - (void)addModules:(NSArray *)modules;
 - (void)addModule:(JSObjectionModule *)module withName:(NSString *)name;
