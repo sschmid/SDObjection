@@ -590,5 +590,4 @@ SPEC_BEGIN(SDObjectionSpec)
             });
         });
 
-
         SPEC_END
