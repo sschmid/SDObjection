@@ -127,7 +127,7 @@ $ pod install
 
 * [Gummi] (https://github.com/sschmid/gummi) Event Command Mapping System for Objective-C
 
-If you enjoy using SDObjection let me know, and I'll mention you right here.
+If you enjoy using SDObjection in your projects let me know, and I'll mention your projects here.
 
 [Objection]: https://github.com/atomicobject/objection
 [CocoaPods]: http://cocoapods.org
