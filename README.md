@@ -25,7 +25,7 @@ SDObjection is modified version of [Objection] - a lightweight dependency inject
 * Removing modules also remove their bindings
 * Injector lets you inject into existing objects
 
-## Using Objection
+## Using SDObjection
 
 #### Create an injector
 
@@ -124,9 +124,6 @@ $ pod install
 ```
 
 ## Other projects using SDObjection
-
-* [Gummi] (https://github.com/sschmid/gummi) Event Command Mapping System for Objective-C
-
 If you enjoy using SDObjection in your projects let me know, and I'll mention your projects here.
 
 [Objection]: https://github.com/atomicobject/objection
