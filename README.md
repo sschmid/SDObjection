@@ -25,7 +25,7 @@ SDObjection is modified version of [Objection] - a lightweight dependency inject
 * Removing modules also remove their bindings
 * Injector lets you inject into existing objects
 
-## Using Objection
+## Using SDObjection
 
 #### Create an injector
 
