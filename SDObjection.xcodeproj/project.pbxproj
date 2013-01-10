@@ -29,6 +29,8 @@
 		8D4DFE0D8E6CC9CF76A2A7BF /* BindBlockToProtocolModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF7A04D83B30AAE930D3F /* BindBlockToProtocolModule.m */; };
 		8D4DFEC1E80DDD50EA6EDDC6 /* SomeModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF12695AD2B19CBC412EE /* SomeModule.m */; };
 		8D4DFFB1779934F2826B17B0 /* RegisterSingletonModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 8D4DF6906036E4EA501D82C1 /* RegisterSingletonModule.m */; };
+		B06B02BF56CE77C960F68ACE /* SomeOtherObjectAsSomeObjectProtocolModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B06B08649B589B762A01CB95 /* SomeOtherObjectAsSomeObjectProtocolModule.m */; };
+		B06B04069614195B684B73AE /* SomeObjectAsSomeObjectProtocolModule.m in Sources */ = {isa = PBXBuildFile; fileRef = B06B0C204EA898FBA62A81E3 /* SomeObjectAsSomeObjectProtocolModule.m */; };
 		CBB07896166679A800160B61 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB07895166679A800160B61 /* UIKit.framework */; };
 		CBB07898166679A800160B61 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB07897166679A800160B61 /* Foundation.framework */; };
 		CBB0789A166679A800160B61 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB07899166679A800160B61 /* CoreGraphics.framework */; };
@@ -102,6 +104,10 @@
 		8D4DFFAD82F8F90FBC6002F7 /* SomeModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeModule.h; sourceTree = "<group>"; };
 		8D4DFFED442CE33975F566C6 /* SomeObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomeObject.m; sourceTree = "<group>"; };
 		9DE141CD645B4736988C25C9 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B06B08649B589B762A01CB95 /* SomeOtherObjectAsSomeObjectProtocolModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomeOtherObjectAsSomeObjectProtocolModule.m; sourceTree = "<group>"; };
+		B06B0ABFE6DC4ACA8940A62C /* SomeOtherObjectAsSomeObjectProtocolModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeOtherObjectAsSomeObjectProtocolModule.h; sourceTree = "<group>"; };
+		B06B0C204EA898FBA62A81E3 /* SomeObjectAsSomeObjectProtocolModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SomeObjectAsSomeObjectProtocolModule.m; sourceTree = "<group>"; };
+		B06B0C69CD2F0354DB17CBBB /* SomeObjectAsSomeObjectProtocolModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SomeObjectAsSomeObjectProtocolModule.h; sourceTree = "<group>"; };
 		CBB07891166679A800160B61 /* SDObjection.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDObjection.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBB07895166679A800160B61 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		CBB07897166679A800160B61 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -200,6 +206,10 @@
 				8D4DF12695AD2B19CBC412EE /* SomeModule.m */,
 				8D4DFE84C099159DA7C4B0D0 /* StartModule.m */,
 				8D4DF296145A096CD80613AD /* StartModule.h */,
+				B06B0C204EA898FBA62A81E3 /* SomeObjectAsSomeObjectProtocolModule.m */,
+				B06B0C69CD2F0354DB17CBBB /* SomeObjectAsSomeObjectProtocolModule.h */,
+				B06B08649B589B762A01CB95 /* SomeOtherObjectAsSomeObjectProtocolModule.m */,
+				B06B0ABFE6DC4ACA8940A62C /* SomeOtherObjectAsSomeObjectProtocolModule.h */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -451,6 +461,8 @@
 				8D4DFBA73C6A667FC8220698 /* SomeSingleton.m in Sources */,
 				8D4DFEC1E80DDD50EA6EDDC6 /* SomeModule.m in Sources */,
 				8D4DF4BF2D090076644BC713 /* StartModule.m in Sources */,
+				B06B04069614195B684B73AE /* SomeObjectAsSomeObjectProtocolModule.m in Sources */,
+				B06B02BF56CE77C960F68ACE /* SomeOtherObjectAsSomeObjectProtocolModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

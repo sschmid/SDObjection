@@ -23,11 +23,14 @@
 
 @implementation JSObjectionInjector
 
+@synthesize parentInjector = _parentInjector;
+
 - (id)init {
     if ((self = [super init])) {
         _context = [[NSMutableDictionary alloc] init];
         _modules = [[NSMutableDictionary alloc] init];
         _eagerSingletons = [[NSMutableSet alloc] init];
+        self.parentInjector = nil;
         [self configureDefaultModule];
     }
 
@@ -75,12 +78,13 @@
             }
 
         }
+        else if (self.parentInjector)
+        {
+            return [self.parentInjector getObject:classOrProtocol arguments:argList];
+        }
 
         return nil;
     }
-
-    return nil;
-
 }
 
 - (void)injectIntoObject:(id)object {
@@ -243,4 +247,10 @@
     }
 }
 
+- (JSObjectionInjector *)createChildInjector
+{
+    JSObjectionInjector *childInjector = [JSObjection createInjector];
+    childInjector.parentInjector = self;
+    return childInjector;
+}
 @end
