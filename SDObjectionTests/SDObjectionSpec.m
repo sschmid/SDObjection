@@ -23,6 +23,10 @@
 #import "RegisterEagerSingletonModule.h"
 #import "RegisterSingletonModule.h"
 #import "StartModule.h"
+#import "KWBeNilMatcher.h"
+#import "KWEqualMatcher.h"
+#import "SomeObjectAsSomeObjectProtocolModule.h"
+#import "SomeOtherObjectAsSomeObjectProtocolModule.h"
 
 SPEC_BEGIN(SDObjectionSpec)
 
@@ -586,6 +590,72 @@ SPEC_BEGIN(SDObjectionSpec)
                     id o = [injector getObject:[SomeObject class]];
 
                     [o shouldBeNil];
+                });
+            });
+
+            context(@"when creating a child injector", ^
+            {
+                __block JSObjectionInjector *childInjector = nil;
+
+                beforeEach(^
+                {
+                    childInjector = [injector createChildInjector];
+                });
+
+                it(@"should create an injector instance", ^
+                {
+                    [[childInjector shouldNot] beNil];
+                    [[childInjector should] beKindOfClass:[JSObjectionInjector class]];
+                });
+
+                it(@"should have it's creator as parent injector", ^
+                {
+                    [[childInjector.parentInjector should] equal:injector];
+                });
+
+                context(@"when requested entry is not mapped", ^
+                {
+                    it(@"should return nil", ^
+                    {
+                        SomeObject *object = [childInjector getObject:[SomeObject class]];
+                        BOOL isNil = object == nil;
+                        [[theValue(isNil) should] beTrue];
+                    });
+
+                });
+
+                context(@"when requested entry is mapped in the child injector only", ^
+                {
+                    it(@"should return the child injector mapping", ^
+                    {
+                        [childInjector addModule:[[SomeObjectAsSomeObjectProtocolModule alloc] init]];
+                        SomeObject *object = [childInjector getObject:@protocol(SomeObjectProtocol)];
+                        [[object should] beKindOfClass:[SomeObject class]];
+                    });
+
+                });
+
+                context(@"when requested entry is mapped in the child and parent injector", ^
+                {
+                    it(@"should return the child injector mapping", ^
+                    {
+                        [injector addModule:[[SomeOtherObjectAsSomeObjectProtocolModule alloc] init]];
+                        [childInjector addModule:[[SomeObjectAsSomeObjectProtocolModule alloc] init]];
+                        SomeObject *object = [childInjector getObject:@protocol(SomeObjectProtocol)];
+                        [[object should] beKindOfClass:[SomeObject class]];
+                    });
+
+                });
+
+                context(@"when requested entry is mapped in the parent injector only", ^
+                {
+                    it(@"should return the parent injector mapping", ^
+                    {
+                        [injector addModule:[[SomeObjectAsSomeObjectProtocolModule alloc] init]];
+                        SomeObject *object = [childInjector getObject:@protocol(SomeObjectProtocol)];
+                        [[object should] beKindOfClass:[SomeObject class]];
+                    });
+
                 });
             });
         });
