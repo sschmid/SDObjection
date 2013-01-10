@@ -7,6 +7,9 @@
     NSMutableDictionary *_modules;
 }
 
+
+@property (nonatomic, strong)JSObjectionInjector * parentInjector;
+
 - (id)getObject:(id)classOrProtocol;
 - (id)getObjectWithArgs:(id)classOrProtocol, ... NS_REQUIRES_NIL_TERMINATION;
 - (id)getObject:(id)classOrProtocol arguments:(va_list)argList;
@@ -28,4 +31,5 @@
 
 - (void)dumpContext;
 
+- (JSObjectionInjector *)createChildInjector;
 @end
